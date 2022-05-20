@@ -15,24 +15,21 @@ let cantidad;
 const base = 2000;
 
 switch(this.marca) {
-case '1':
-    cantidad = base *1.15;
-    break;
-case '2':
-    cantidad = base *1.05;
-    break;
-case '3':
-    cantidad = base *1.35;
-    break;
-
-
+    case '1':
+        cantidad = base *1.15;
+        break;
+    case '2':
+        cantidad = base *1.05;
+        break;
+    case '3':
+        cantidad = base *1.35;
+        break;
     default:
         break;
 }
 
 // leer el year
 const diferencia = new Date().getFullYear() - this.year;
-
 
 // cada year que la diferencia es mayor, el costo va a reducirse un 3%
 cantidad -= ((diferencia * 3) * cantidad) /100;
@@ -47,9 +44,7 @@ if(this.tipo === 'basico'){
 } else{
     cantidad *= 1.50;
 }
-
-return cantidad;
-
+    return cantidad;
 }
 
 /* Logica de Seguros
@@ -65,19 +60,16 @@ Y por cada year que el auto sea mas antiguo > Reducir un 3%
 
 function UI(){
 }
-
 //Llena opciones de years (Prototype)
 UI.prototype.llenarOpciones = ()=>{
     const max = new Date().getFullYear(),
     min = max - 20;
     const selectYear = document.querySelector('#year');
-
-
     for(let i=max; i > min; i--){
-    let option = document.createElement('option');
-    option.value = i; // Year donde estamos Iterando
-    option.textContent = i; // Usuario va a ver los years
-    selectYear.appendChild(option);
+        let option = document.createElement('option');
+        option.value = i; // Year donde estamos Iterando
+        option.textContent = i; // Usuario va a ver los years
+        selectYear.appendChild(option);
     }
 }
 
@@ -112,20 +104,19 @@ UI.prototype.mostrarResultado = (total,seguro)=>{
     switch(marca){
         case '1' :
             textoMarca = 'Americano'
-        break;
+            break;
         
         case '2' :
             textoMarca = 'Asiatico'
-        break;
+            break;
         
         case '3' :
             textoMarca = 'Europeo'
-        break;
+            break;
 
         default:
             break;
     }
-
     // Crear resultado
     const div = document.createElement('div')
     div.classList.add('mt-10');
@@ -147,19 +138,13 @@ UI.prototype.mostrarResultado = (total,seguro)=>{
         spinner.style.display = 'none'; // Si ponemos remove se va a eliminar una vez que cotizemos otra vez, por eso el none
         resultadoDiv.appendChild(div); // Se ejecuta despues de que el Spinner fue eliminado
     },3000);
-
-
 }
-
-
 // Instanciar UI
-
 const ui = new UI();
 
 document.addEventListener("DOMContentLoaded",()=>{
     ui.llenarOpciones(); // Llena el select con Years
 })
-
 eventListeners();
 
 // Adding a prototype a este selector va a consumir datos
